@@ -3,6 +3,7 @@
 
 To run :  ./gradlew bootRun
 To build : ./gradlew build
+To run test: ./gradlew test
 
 # What I use
          I prefer to use gralde for the build. 

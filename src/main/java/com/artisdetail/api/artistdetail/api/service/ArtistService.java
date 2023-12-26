@@ -17,7 +17,6 @@ import java.util.Objects;
 public class ArtistService {
 
 
-
     private ArtistClient<ArtistDto> artistClient;
 
     @Autowired
@@ -27,8 +26,8 @@ public class ArtistService {
 
     public Mono<Artist> getArtistDetail(MBID id) {
         log.debug("artist detail request by id: {}", id);
-        if(id == null) return  Mono.empty();
-         StringBuilder stringBuilder = new StringBuilder();
+        if (id == null) return Mono.empty();
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("/ws/2/artist/").append(id.getMbid()).append("?&fmt=json&inc=url-rels+release-groups");
 
         return artistClient.getAs(stringBuilder.toString(), new ParameterizedTypeReference<>() {
