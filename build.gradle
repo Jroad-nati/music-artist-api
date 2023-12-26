@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.6'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.artis-detail.api'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2022.0.4")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'javax.annotation:javax.annotation-api:1.3.2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	testImplementation 'org.junit.platform:junit-platform-runner:1.10.1'
+	testImplementation 'org.mockito:mockito-junit-jupiter:5.8.0'
+	testImplementation 'com.squareup.okhttp3:okhttp'
+	testImplementation 'com.squareup.okhttp3:mockwebserver'
+	testImplementation 'org.mockito:mockito-inline:5.2.0'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
