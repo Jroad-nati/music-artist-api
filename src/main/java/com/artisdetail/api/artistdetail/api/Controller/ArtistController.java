@@ -1,8 +1,12 @@
 package com.artisdetail.api.artistdetail.api.Controller;
 
 
+import com.artisdetail.api.artistdetail.api.model.down.Album;
+import com.artisdetail.api.artistdetail.api.model.down.ArtistDto;
+import com.artisdetail.api.artistdetail.api.model.down.CovertArtArchive;
 import com.artisdetail.api.artistdetail.api.model.up.Artist;
 import com.artisdetail.api.artistdetail.api.model.MBID;
+import com.artisdetail.api.artistdetail.api.model.up.ArtistDetail;
 import com.artisdetail.api.artistdetail.api.service.ArtistService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -26,7 +31,7 @@ public class ArtistController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/detail/{id}")
-    public  Mono<Artist> getArtistDetail(@PathVariable String id ){
+    public  Mono<ArtistDetail> getArtistDetail(@PathVariable String id ){
         log.info("Artist id : {}", id);
         return artistsService.getArtistDetail(MBID.from(id));     }
 }

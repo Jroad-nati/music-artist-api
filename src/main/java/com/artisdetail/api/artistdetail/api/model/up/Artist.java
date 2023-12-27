@@ -2,12 +2,15 @@ package com.artisdetail.api.artistdetail.api.model.up;
 
 
 import com.artisdetail.api.artistdetail.api.model.down.ArtistDto;
+import com.artisdetail.api.artistdetail.api.model.down.ReleaseGroups;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +24,8 @@ public class Artist {
     private String gender;
     private String country;
     private String disambiguation;
+
+
 
 
 
