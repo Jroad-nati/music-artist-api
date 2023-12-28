@@ -4,9 +4,7 @@ import com.artisdetail.api.artistdetail.api.Client.ArtistClient;
 import com.artisdetail.api.artistdetail.api.Client.CoverArtArchiveClient;
 import com.artisdetail.api.artistdetail.api.model.MBID;
 import com.artisdetail.api.artistdetail.api.model.down.ArtistDto;
-import com.artisdetail.api.artistdetail.api.model.down.CovertArtArchive;
 import com.artisdetail.api.artistdetail.api.model.down.ReleaseGroups;
-import com.artisdetail.api.artistdetail.api.model.up.Artist;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +36,8 @@ public class ArtistServiceTest {
         ArtistService artistService= new ArtistService(mocArtistClient,moCoverArtArchiveClient );
         StepVerifier.create(artistService.getArtistDetail(mbid))
                 .expectNextMatches(obj ->
-                    !obj.getArtist().getName().isEmpty() &&
-                     obj.getArtist().getId().equals(mbid.getMbid())
+                    !obj.getName().isEmpty() &&
+                     obj.getId().equals(mbid.getMbid())
                 ).verifyComplete();
     }
 

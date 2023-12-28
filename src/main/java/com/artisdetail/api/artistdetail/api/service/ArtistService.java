@@ -5,7 +5,6 @@ import com.artisdetail.api.artistdetail.api.Client.CoverArtArchiveClient;
 import com.artisdetail.api.artistdetail.api.model.down.Album;
 import com.artisdetail.api.artistdetail.api.model.down.CovertArtArchive;
 import com.artisdetail.api.artistdetail.api.model.down.ReleaseGroups;
-import com.artisdetail.api.artistdetail.api.model.up.Artist;
 import com.artisdetail.api.artistdetail.api.model.down.ArtistDto;
 import com.artisdetail.api.artistdetail.api.model.MBID;
 import com.artisdetail.api.artistdetail.api.model.up.ArtistDetail;
@@ -19,7 +18,6 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -47,13 +45,14 @@ public class ArtistService {
         });
         Mono<List<ReleaseGroups>> rgList = artistInfo.map(rg -> rg.getReleaseGroups().stream().collect(Collectors.toList()));
         Mono<List<Album>> listOFCoverArt = getAlbum(rgList);
-        return Mono.zip(artistInfo.map(Artist::from), listOFCoverArt).map(w ->ArtistDetail.from(w.getT1(),w.getT2()));
+        return Mono.zip(artistInfo, listOFCoverArt).map(t -> {
+            return ArtistDetail.from(t.getT1(),t.getT2());
+        });
     }
 
 
 
     private static Mono<List<Album>> getAlbum(Mono<List<ReleaseGroups>> releaseGroups) {
-
         return releaseGroups.flatMapMany(Flux::fromIterable).map(c -> {
             return fetchDataForId(c.getId()).map(b -> b.getImages().stream().collect(Collectors.toList()).get(0).getImage())
                     .map(r -> {
