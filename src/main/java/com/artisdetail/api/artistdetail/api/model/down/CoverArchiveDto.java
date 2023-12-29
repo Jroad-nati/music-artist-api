@@ -14,6 +14,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ToString
-public class CovertArtArchive {
+public class CoverArchiveDto {
     private List<CoverImage> images;
 }

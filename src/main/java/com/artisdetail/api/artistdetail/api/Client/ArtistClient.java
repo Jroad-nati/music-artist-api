@@ -21,7 +21,7 @@ import java.time.temporal.ChronoUnit;
 
 @Component
 @Slf4j
-public class ArtistClient<T> {
+public class ArtistClient {
 
     private WebClient client;
 
@@ -37,7 +37,7 @@ public class ArtistClient<T> {
                 .build();
     }
 
-    public Mono<T> getAs(final String s, ParameterizedTypeReference<T> clazz) {
+    public <T> Mono<T> getAs(final String s, ParameterizedTypeReference<T> clazz) {
          log.debug("Calling artist client at {}", baseUrl);
         return client
                  .get()

@@ -2,7 +2,7 @@ package com.artisdetail.api.artistdetail.api.Client;
 
 
 import com.artisdetail.api.artistdetail.api.Exception.CustomizingWebClientResponseException;
-import com.artisdetail.api.artistdetail.api.model.down.CovertArtArchive;
+import com.artisdetail.api.artistdetail.api.model.down.CoverArchiveDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -39,7 +39,7 @@ public class CoverArtArchiveClient {
                 .build();
     }
 
-    public Mono<CovertArtArchive> getAs(final String s, ParameterizedTypeReference<CovertArtArchive> clazz) {
+    public Mono<CoverArchiveDto> getAs(final String s, ParameterizedTypeReference<CoverArchiveDto> clazz) {
         log.debug("Calling artist client at {}", baseUrl);
         return client.get().uri(s).retrieve().onStatus(status -> status.is4xxClientError() || status.is5xxServerError(),
                         response -> Mono.error(CustomizingWebClientResponseException.ArtistClientResponseException(response.statusCode().value(), HttpStatus.valueOf(response.statusCode().value()).getReasonPhrase())))

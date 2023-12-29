@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 public class ArtistServiceTest {
 
-    ArtistClient<ArtistDto> mocArtistClient;
+    ArtistClient mocArtistClient;
     CoverArtArchiveClient moCoverArtArchiveClient;
     private  final MBID mbid= MBID.from("123xx-456yyy--789zzz");
     @BeforeEach
@@ -37,7 +37,7 @@ public class ArtistServiceTest {
         StepVerifier.create(artistService.getArtistDetail(mbid))
                 .expectNextMatches(obj ->
                     !obj.getName().isEmpty() &&
-                     obj.getId().equals(mbid.getMbid())
+                     obj.getMbid().equals(mbid.getMbid())
                 ).verifyComplete();
     }
 

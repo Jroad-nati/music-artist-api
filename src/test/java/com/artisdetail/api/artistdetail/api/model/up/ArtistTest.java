@@ -19,7 +19,6 @@ public class ArtistTest {
         List<ReleaseGroups>  releaseGroups= new ArrayList<>();
         List<Album> albums=new ArrayList<>();
         ArtistDto artistDto=new ArtistDto("id","name","gender", "country", "disambiguation", releaseGroups);
-
-        assertEquals("id", ArtistDetail.from(artistDto,albums).getId());
+        assertEquals("id", ArtistDetail.from(artistDto,albums).getMbid());
     }
 }

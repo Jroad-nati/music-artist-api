@@ -15,12 +15,12 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/api/music/artist")
 @Slf4j
-public class ArtistController {
+public class ArtistDetailController {
 
     private final ArtistService artistsService;
 
     @Autowired
-    public ArtistController(final ArtistService service) {
+    public ArtistDetailController(final ArtistService service) {
         this.artistsService= Objects.requireNonNull(service);
     }
 

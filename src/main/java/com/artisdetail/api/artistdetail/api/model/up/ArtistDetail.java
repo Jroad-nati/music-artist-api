@@ -18,8 +18,8 @@ import java.util.PrimitiveIterator;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ArtistDetail {
-    @JsonProperty("mbid")
-    private String id;
+
+    private String mbid;
     private String name;
     private String gender;
     private String country;
